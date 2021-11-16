@@ -1,8 +1,9 @@
 const express = require('express');
+const {animals} = require('./data/animals');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-const {animals} = require('./data/animals');
 
 
 
@@ -37,8 +38,8 @@ function filterByQuery(query, animalsArray) {
                 animal => animal.personalityTraits.indexOf(trait) !== -1
              );
             });
+    }
         
-
     if (query.diet) {
         filteredResults = filteredResults.filter(animal => animal.diet === query.diet);
     }
@@ -51,7 +52,7 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 
 }
-};
+
 
 function findById(id, animalsArray) {
     const result = animalsArray.filter(animal => animal.id === id)[0];
