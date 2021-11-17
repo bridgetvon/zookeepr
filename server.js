@@ -4,8 +4,10 @@ const {animals} = require('./data/animals');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-
-
+//define an endpoint for the server 
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+})
 
 
 
