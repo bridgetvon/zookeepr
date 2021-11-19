@@ -17,13 +17,17 @@ const path = require('path');
 //extended:true option set inside informs our server that there may be sub array data nested in it as well  
 app.use(express.urlencoded({ extended: true }));
 //parse incoming JSON data
+//express.json data parses into the req.body js object 
 
 app.use(express.json());
-//express.json data parses into the req.body js object 
+
+//make a route to css and js code this will make files readily available 
+app.use(express.static('public'));
+
 //define an endpoint for the server 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-})
+// app.get('/', (req, res) => {
+//     res.send('Hello World!');
+// })
 
 
 
@@ -149,7 +153,11 @@ app.post('/api/animals', (req, res) => {
     res.json(animal);
     }
 });
-
+//add a route to the server.js
+//this route responds with an HTML page to display to the browser 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
