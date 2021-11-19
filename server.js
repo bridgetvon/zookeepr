@@ -22,6 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //make a route to css and js code this will make files readily available 
+//express static provides a file path to a location in our application and instructs the server to 
+//make these files static resources 
 app.use(express.static('public'));
 
 //define an endpoint for the server 
@@ -156,6 +158,21 @@ app.post('/api/animals', (req, res) => {
 //add a route to the server.js
 //this route responds with an HTML page to display to the browser 
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+//this route will take us to animals 
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+//wildcard request this handles requests to routes that do not exist 
+//they will receieve the homepage as a response 
+//the *(wildcard) route should always come last!
+app.get('*', (req, res) =>{
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 

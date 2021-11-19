@@ -30,6 +30,20 @@ const getAnimals = (formData = {}) => {
   });
 
   console.log(queryUrl);
+  //fetch request to make a get request 
+  fetch(queryUrl)
+  .then(response => {
+    //have to check that the response is okay 
+    if (!response.ok) {
+      return alert('Error: ' + response.statusText);
+    }
+    //if eveything goes without error parse the response 
+    return response.json();
+  })
+  .then(animalData => {
+    console.log(animalData);
+    printResults(animalData);
+  });
 
 };
 
